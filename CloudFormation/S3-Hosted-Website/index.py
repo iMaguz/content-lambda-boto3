@@ -31,11 +31,11 @@ def lambda_handler(event, context):
         extract(local_file, '/tmp')
         upload_to_s3(bucket, f'/tmp/{repo_name}-master/{repo_subdir}')
         cfnresponse.send(event, context, cfnresponse.SUCCESS,
-                         response_data, "CustomResourcePhysicalID")
+                        response_data, "CustomResourcePhysicalID")
     except Exception as e:
         print("Error: " + str(e))
         cfnresponse.send(event, context, cfnresponse.FAILED,
-                         response_data, "CustomResourcePhysicalID")
+                        response_data, "CustomResourcePhysicalID")
     finally:
         # Cancel timer before exit
         t.cancel()
@@ -45,7 +45,7 @@ def lambda_handler(event, context):
 def timeout(event, context, logger):
     print("Execution is about to time out, sending failure message")
     cfnresponse.send(event, context, cfnresponse.FAILED,
-                     {}, "CustomResourcePhysicalID", reason="Execution timed out")
+                    {}, "CustomResourcePhysicalID", reason="Execution timed out")
 
 
 def download_repo(url):
